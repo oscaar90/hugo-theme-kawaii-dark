@@ -1,0 +1,149 @@
+{{ define "main" }}
+
+<!-- ══════════════════════════════════════════
+     HERO — Gran Meta
+     ══════════════════════════════════════════ -->
+<section class="min-h-screen flex items-center justify-center px-6 pt-16 relative overflow-hidden">
+
+  <!-- Subtle background glow (purely decorative) -->
+  <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-violet/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+
+    <!-- Label -->
+    <p class="text-blue text-xs font-mono tracking-widest uppercase mb-8 opacity-80">
+      {{ .Site.Params.hero_label | default "Mi Gran Meta" }}
+    </p>
+
+    <!-- Headline -->
+    <h1 class="text-5xl md:text-7xl font-bold text-smoke leading-[1.1] mb-8 tracking-tight">
+      {{ .Site.Params.hero_title | safeHTML | default "Construyendo el futuro,<br>una línea de código a la vez." }}
+    </h1>
+
+    <!-- Sub-headline -->
+    <p class="text-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12">
+      {{ .Site.Params.hero_description | default "Portfolio, laboratorio de ideas y cuaderno de campo de un ingeniero que no para de aprender." }}
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="{{ .Site.Params.hero_cta_url | default "/blog" }}"
+         class="px-7 py-3 bg-blue text-void text-sm font-semibold rounded-full hover:bg-blue/90 active:scale-95 transition-all duration-200">
+        {{ .Site.Params.hero_cta | default "Ver el blog" }}
+      </a>
+      <a href="{{ .Site.Params.hero_secondary_url | default "/about" }}"
+         class="px-7 py-3 border border-zinc-800 text-smoke text-sm rounded-full hover:border-blue/40 hover:text-blue transition-all duration-200">
+        {{ .Site.Params.hero_secondary | default "Sobre mí" }}
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     METRICS GRID — Logros en números
+     ══════════════════════════════════════════ -->
+{{ with .Site.Params.metrics }}
+<section class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <p class="text-muted text-xs font-mono tracking-widest uppercase text-center mb-12">
+      Logros en números
+    </p>
+
+    <!-- Grid separado por líneas, estilo tablero -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-900 border border-zinc-900 rounded-lg overflow-hidden">
+      {{ range . }}
+      <div class="group bg-void p-8 md:p-10 flex flex-col gap-2 hover:bg-surface transition-colors duration-300 cursor-default">
+        <span class="text-4xl md:text-5xl font-bold text-smoke group-hover:text-blue transition-colors duration-300 leading-none">
+          {{ .value }}
+        </span>
+        <span class="text-muted text-sm leading-snug">{{ .label }}</span>
+      </div>
+      {{ end }}
+    </div>
+
+  </div>
+</section>
+{{ end }}
+
+
+<!-- ══════════════════════════════════════════
+     LATEST POSTS — Últimas 3 entradas
+     ══════════════════════════════════════════ -->
+{{ $section := .Site.Params.blog_section | default "blog" }}
+{{ $posts   := where .Site.RegularPages "Section" $section | first 3 }}
+
+{{ if $posts }}
+<section class="py-24 px-6 border-t border-zinc-900">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="flex items-center justify-between mb-12">
+      <p class="text-muted text-xs font-mono tracking-widest uppercase">Últimas entradas</p>
+      <a href="/{{ $section }}" class="text-blue text-sm font-mono hover:underline underline-offset-4">
+        Ver todo →
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {{ range $posts }}
+      <article>
+        <a href="{{ .Permalink }}" class="group block h-full">
+          <div class="bg-surface border border-zinc-900 rounded-xl p-6 h-full flex flex-col
+                      hover:border-blue/20 hover:bg-[#181818] transition-all duration-300">
+
+            <!-- Tags -->
+            {{ if .Params.tags }}
+            <div class="flex flex-wrap gap-2 mb-5">
+              {{ range first 2 .Params.tags }}
+              <span class="text-xs font-mono text-blue/60 bg-blue/5 border border-blue/10 px-2 py-0.5 rounded-full">
+                #{{ . }}
+              </span>
+              {{ end }}
+            </div>
+            {{ end }}
+
+            <!-- Title -->
+            <h3 class="text-smoke font-semibold leading-snug mb-3 group-hover:text-blue transition-colors duration-200 flex-1">
+              {{ .Title }}
+            </h3>
+
+            <!-- Excerpt -->
+            <p class="text-muted text-sm leading-relaxed line-clamp-3 mb-6">
+              {{ .Summary | plainify | truncate 120 }}
+            </p>
+
+            <!-- Meta -->
+            <div class="pt-4 border-t border-zinc-900 flex items-center justify-between">
+              <time class="text-muted text-xs font-mono">{{ .Date.Format "02 Jan 2006" }}</time>
+              <span class="text-muted text-xs">{{ .ReadingTime }} min</span>
+            </div>
+
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+
+  </div>
+</section>
+{{ end }}
+
+
+<!-- ══════════════════════════════════════════
+     VISION — Hacia dónde voy (opcional)
+     ══════════════════════════════════════════ -->
+{{ with .Site.Params.vision }}
+<section class="py-24 px-6 border-t border-zinc-900">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="text-muted text-xs font-mono tracking-widest uppercase mb-6">Visión</p>
+    <p class="text-smoke text-2xl md:text-3xl font-medium leading-relaxed">
+      {{ . | safeHTML }}
+    </p>
+  </div>
+</section>
+{{ end }}
+
+{{ end }}

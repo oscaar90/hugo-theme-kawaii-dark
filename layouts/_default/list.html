@@ -1,0 +1,99 @@
+{{ define "main" }}
+<div class="pt-32 pb-32 px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <!-- ── Page header ── -->
+    <header class="mb-16">
+      {{ if eq .Kind "term" }}
+        <p class="text-blue text-xs font-mono tracking-widest uppercase mb-3">Tag</p>
+        <h1 class="text-4xl font-bold text-smoke">#{{ .Title }}</h1>
+      {{ else if eq .Kind "taxonomy" }}
+        <p class="text-blue text-xs font-mono tracking-widest uppercase mb-3">Explorar por</p>
+        <h1 class="text-4xl font-bold text-smoke">{{ .Title }}</h1>
+      {{ else }}
+        <h1 class="text-4xl font-bold text-smoke">{{ .Title | default "Blog" }}</h1>
+      {{ end }}
+
+      {{ if .Content }}
+      <div class="text-muted mt-4 leading-relaxed">{{ .Content }}</div>
+      {{ end }}
+
+      <p class="text-muted text-sm font-mono mt-4">
+        {{ len .Pages }} {{ if eq (len .Pages) 1 }}entrada{{ else }}entradas{{ end }}
+      </p>
+    </header>
+
+
+    <!-- ── Tag cloud (solo visible en la lista principal, no en term pages) ── -->
+    {{ if ne .Kind "term" }}
+    {{ $allTags := .Site.Taxonomies.tags }}
+    {{ if $allTags }}
+    <div class="mb-16 pb-16 border-b border-zinc-900">
+      <p class="text-muted text-xs font-mono tracking-widest uppercase mb-5">Tags</p>
+      <div class="flex flex-wrap gap-2">
+        {{ range $name, $taxonomy := $allTags }}
+        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}"
+           class="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5
+                  bg-surface border border-zinc-800 rounded-full
+                  text-muted hover:text-blue hover:border-blue/30 transition-all duration-200">
+          #{{ $name }}
+          <span class="text-zinc-700">{{ len $taxonomy }}</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+    {{ end }}
+
+
+    <!-- ── Post list ── -->
+    <div>
+      {{ range .Pages }}
+      <article class="group border-b border-zinc-900 py-8 first:pt-0">
+        <a href="{{ .Permalink }}" class="block">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
+
+            <!-- Date column -->
+            <time class="text-muted text-xs font-mono shrink-0 sm:w-20 sm:pt-1.5">
+              {{ .Date.Format "Jan 2006" }}
+            </time>
+
+            <!-- Content column -->
+            <div class="flex-1 min-w-0">
+              <h2 class="text-smoke font-semibold text-lg leading-snug mb-2
+                         group-hover:text-blue transition-colors duration-200">
+                {{ .Title }}
+              </h2>
+
+              {{ if .Summary }}
+              <p class="text-muted text-sm leading-relaxed mb-4 line-clamp-2">
+                {{ .Summary | plainify | truncate 150 }}
+              </p>
+              {{ end }}
+
+              <!-- Tags -->
+              {{ if .Params.tags }}
+              <div class="flex flex-wrap gap-2 items-center">
+                {{ range .Params.tags }}
+                <span class="text-xs font-mono text-blue/50 bg-blue/5 px-2 py-0.5 rounded-full">
+                  #{{ . }}
+                </span>
+                {{ end }}
+                <span class="text-muted text-xs ml-auto">{{ .ReadingTime }} min</span>
+              </div>
+              {{ end }}
+            </div>
+
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+
+
+    <!-- ── Pagination ── -->
+    {{ template "_internal/pagination.html" . }}
+
+  </div>
+</div>
+{{ end }}

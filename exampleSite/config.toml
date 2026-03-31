@@ -1,0 +1,146 @@
+baseURL  = "https://example.com/"
+languageCode = "es-ES"
+title    = "Tu Nombre"
+theme    = "kawaii-dark"
+
+# Solo tags — sin categorías
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.highlight]
+    style              = "nord"
+    lineNos            = false
+    tabWidth           = 2
+    codeFences         = true
+    guessSyntax        = true
+  [markup.goldmark.renderer]
+    unsafe = true   # permite HTML en Markdown (captions, etc.)
+
+[params]
+  description    = "Portfolio, laboratorio de ideas y cuaderno de campo."
+  blog_section   = "blog"
+  footer_tagline = "Ingeniería, experimentos y caos controlado."
+
+  # ── Hero ──────────────────────────────────────
+  hero_label           = "Mi Gran Meta"
+  hero_title           = "De 0 a Senior en infraestructura,<br>documentado en tiempo real."
+  hero_description     = "Portfolio, laboratorio de ideas y cuaderno de campo de un ingeniero que no para de aprender."
+  hero_cta             = "Ver el blog"
+  hero_cta_url         = "/blog"
+  hero_secondary       = "Sobre mí"
+  hero_secondary_url   = "/about"
+
+  # ── Visión (sección opcional bajo las métricas) ──
+  vision = "Mi meta: conseguir un rol como <span class='text-pink'>Senior SRE / Platform Engineer</span> en un equipo que construya con criterio, no con hype."
+
+  # ── Métricas / Logros ─────────────────────────
+  [[params.metrics]]
+    value = "15+"
+    label = "años en infraestructura"
+
+  [[params.metrics]]
+    value = "50+"
+    label = "proyectos desplegados"
+
+  [[params.metrics]]
+    value = "3"
+    label = "certificaciones activas"
+
+  [[params.metrics]]
+    value = "∞"
+    label = "cafés consumidos"
+
+  # ── Social ────────────────────────────────────
+  [params.social]
+    github   = "https://github.com/tuusuario"
+    linkedin = "https://linkedin.com/in/tuusuario"
+
+# ── CV / Portfolio ────────────────────────────
+[params.cv]
+  declaration      = "Llevo 15 años haciendo que los sistemas no exploten cuando más importa, y que los equipos no tengan que despertarse a las 3am para arreglarlos."
+  years            = "15"
+  chips            = ["SRE & Infrastructure", "Automatización", "Seguridad aplicada"]
+  available        = true
+  available_label  = "Disponible para nuevas oportunidades"
+
+  [[params.cv.logros]]
+    metric = "~40%"
+    title  = "Reducción de incidencias críticas"
+    detail = "Diseño e implantación de alertas tempranas y runbooks automatizados en entorno financiero con 200+ servicios."
+
+  [[params.cv.logros]]
+    metric = "0→prod"
+    title  = "Pipeline CI/CD desde cero"
+    detail = "Migración de despliegues manuales a GitOps en equipo de 15 devs. Cero rollbacks en producción en 8 meses."
+
+  [[params.cv.logros]]
+    metric = "TFM"
+    title  = "OpsGuard-AI"
+    detail = "GitHub Action con doble barrera (regex + LLM) para detectar secretos y vulnerabilidades en PRs. Open source."
+
+  [[params.cv.areas]]
+    name  = "Infraestructura & SRE"
+    items = [
+      "Sistemas resilientes con SLOs reales, no teóricos",
+      "On-call estructurado, postmortems sin señalar culpables",
+      "Kubernetes, Terraform, Ansible en producción real",
+      "Observabilidad que se usa, no que se instala y olvida"
+    ]
+
+  [[params.cv.areas]]
+    name  = "Automatización"
+    items = [
+      "Pipelines CI/CD que no necesitan babysitter",
+      "Scripting Python/Bash para operaciones repetibles",
+      "IaC como práctica de ingeniería, no como moda",
+      "GitHub Actions, GitLab CI en flujos reales de equipo"
+    ]
+
+  [[params.cv.areas]]
+    name  = "Seguridad aplicada"
+    items = [
+      "Hardening Linux en entornos regulados",
+      "Gestión de secretos y mínimo privilegio como hábito",
+      "SAST integrado en pipeline, no como auditoría puntual"
+    ]
+
+  [[params.cv.no_soy]]
+    item = "No soy frontend. No diseño UIs ni escribo React."
+
+  [[params.cv.no_soy]]
+    item = "No soy el héroe que resuelve todo en modo pánico. Prefiero los sistemas que no necesitan héroes."
+
+  [[params.cv.no_soy]]
+    item = "No busco startup en modo hipercrecimiento sin estructura. El caos permanente no lo llamo reto, lo llamo deuda."
+
+  [[params.cv.no_soy]]
+    item = "No soy junior disfrazado de senior. Tampoco el que conoce todos los frameworks pero nunca ha roto nada en producción."
+
+  [params.cv.cta]
+    text     = "¿Encaja lo que lees con lo que necesitas?"
+    label    = "Hablemos"
+    email    = "oscar@oscarai.tech"
+    linkedin = "https://linkedin.com/in/oscarspdev"
+
+# ── Menú principal ────────────────────────────
+[menu]
+  [[menu.main]]
+    name   = "Blog"
+    url    = "/blog"
+    weight = 10
+
+  [[menu.main]]
+    name   = "Tags"
+    url    = "/tags"
+    weight = 20
+
+  [[menu.main]]
+    name   = "Proyectos"
+    url    = "/projects"
+    weight = 30
+
+  [[menu.main]]
+    name   = "CV"
+    url    = "/cv"
+    weight = 40

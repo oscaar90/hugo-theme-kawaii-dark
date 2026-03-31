@@ -1,0 +1,140 @@
+{{ define "main" }}
+{{ $cv := .Site.Params.cv }}
+
+<div class="pt-32 pb-32 px-6">
+  <div class="max-w-3xl mx-auto">
+
+
+    <!-- ══════════════════════════════════════════
+         1. DECLARACIÓN — Quién eres en una frase
+         ══════════════════════════════════════════ -->
+    <section class="mb-24">
+
+      <p class="text-blue text-xs font-mono tracking-widest uppercase mb-6">Quién soy</p>
+
+      <p class="text-smoke text-3xl md:text-4xl font-semibold leading-[1.35] mb-8">
+        {{ $cv.declaration }}
+      </p>
+
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-muted text-sm font-mono mb-6">
+        {{ with $cv.years }}<span>{{ . }} años de experiencia</span>{{ end }}
+        {{ range $cv.chips }}
+        <span class="flex items-center gap-2">
+          <span class="text-zinc-700">·</span>{{ . }}
+        </span>
+        {{ end }}
+      </div>
+
+      {{ if $cv.available }}
+      <div class="inline-flex items-center gap-2.5 bg-mint/5 border border-mint/15 rounded-full px-4 py-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-mint shrink-0"></span>
+        <span class="text-mint text-xs font-mono">{{ $cv.available_label | default "Disponible para nuevas oportunidades" }}</span>
+      </div>
+      {{ end }}
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         2. LOGROS — Qué has hecho que importa
+         ══════════════════════════════════════════ -->
+    {{ with $cv.logros }}
+    <section class="mb-24 pt-16 border-t border-zinc-900">
+
+      <p class="text-blue text-xs font-mono tracking-widest uppercase mb-10">Qué he hecho que importa</p>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        {{ range . }}
+        <div class="bg-surface border border-zinc-900 rounded-xl p-7 flex flex-col gap-3">
+          <p class="text-4xl font-bold text-blue font-mono leading-none tracking-tight">{{ .metric }}</p>
+          <p class="text-smoke font-semibold leading-snug text-sm">{{ .title }}</p>
+          <p class="text-muted text-sm leading-relaxed">{{ .detail }}</p>
+        </div>
+        {{ end }}
+      </div>
+
+    </section>
+    {{ end }}
+
+
+    <!-- ══════════════════════════════════════════
+         3. CAPACIDADES — En qué eres realmente bueno
+         ══════════════════════════════════════════ -->
+    {{ with $cv.areas }}
+    <section class="mb-24 pt-16 border-t border-zinc-900">
+
+      <p class="text-blue text-xs font-mono tracking-widest uppercase mb-10">En qué soy realmente bueno</p>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        {{ range . }}
+        <div>
+          <p class="text-smoke text-xs font-mono font-semibold tracking-widest uppercase mb-5">{{ .name }}</p>
+          <ul class="space-y-3.5">
+            {{ range .items }}
+            <li class="flex gap-3 text-sm leading-snug">
+              <span class="text-blue shrink-0 mt-0.5 font-mono">—</span>
+              <span class="text-muted">{{ . }}</span>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+      </div>
+
+    </section>
+    {{ end }}
+
+
+    <!-- ══════════════════════════════════════════
+         4. QUÉ NO SOY — Filtro de mal fit
+         ══════════════════════════════════════════ -->
+    {{ with $cv.no_soy }}
+    <section class="mb-24 pt-16 border-t border-zinc-900">
+
+      <p class="text-amber text-xs font-mono tracking-widest uppercase mb-10">Qué no soy</p>
+
+      <div class="bg-amber/[0.03] border border-amber/10 rounded-xl px-8 py-7 space-y-5">
+        {{ range . }}
+        <p class="flex gap-4 text-sm leading-relaxed">
+          <span class="text-amber font-mono shrink-0">—</span>
+          <span class="text-muted">{{ .item }}</span>
+        </p>
+        {{ end }}
+      </div>
+
+    </section>
+    {{ end }}
+
+
+    <!-- ══════════════════════════════════════════
+         CTA — Un único punto de contacto
+         ══════════════════════════════════════════ -->
+    {{ with $cv.cta }}
+    <section class="pt-16 border-t border-zinc-900 text-center">
+
+      <p class="text-smoke text-xl font-medium mb-8">{{ .text }}</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {{ with .email }}
+        <a href="mailto:{{ . }}"
+           class="px-7 py-3 bg-blue text-void text-sm font-semibold rounded-full
+                  hover:bg-blue/90 active:scale-95 transition-all duration-200">
+          {{ $.Site.Params.cv.cta.label | default "Hablemos" }}
+        </a>
+        {{ end }}
+        {{ with .linkedin }}
+        <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+           class="px-7 py-3 border border-zinc-800 text-smoke text-sm rounded-full
+                  hover:border-blue/40 hover:text-blue transition-all duration-200">
+          LinkedIn →
+        </a>
+        {{ end }}
+      </div>
+
+    </section>
+    {{ end }}
+
+
+  </div>
+</div>
+{{ end }}

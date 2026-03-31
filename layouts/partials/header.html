@@ -1,0 +1,53 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-void/95 backdrop-blur-md border-b border-zinc-900">
+  <nav class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+
+    <!-- Logo / Site title -->
+    <a href="{{ .Site.BaseURL }}"
+       class="font-semibold text-smoke tracking-tight hover:text-blue transition-colors duration-200 shrink-0">
+      {{ .Site.Title }}
+    </a>
+
+    <!-- Nav links (desktop) -->
+    <ul class="hidden md:flex items-center gap-8">
+      {{ range .Site.Menus.main }}
+      <li>
+        <a href="{{ .URL }}"
+           class="text-sm transition-colors duration-200 {{ if $.IsMenuCurrent "main" . }}text-blue{{ else }}text-muted hover:text-smoke{{ end }}">
+          {{ .Name }}
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+
+    <!-- Mobile: hamburger placeholder (progressively enhanced) -->
+    <button id="menu-toggle"
+            class="md:hidden text-muted hover:text-smoke transition-colors"
+            aria-label="Menú">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+
+  </nav>
+
+  <!-- Mobile menu (hidden by default) -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-900 bg-void">
+    <ul class="max-w-5xl mx-auto px-6 py-4 space-y-3">
+      {{ range .Site.Menus.main }}
+      <li>
+        <a href="{{ .URL }}"
+           class="block text-sm py-1 {{ if $.IsMenuCurrent "main" . }}text-blue{{ else }}text-muted hover:text-smoke{{ end }} transition-colors">
+          {{ .Name }}
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

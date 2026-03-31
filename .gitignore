@@ -1,0 +1,10 @@
+node_modules/
+exampleSite/node_modules
+exampleSite/postcss.config.js
+exampleSite/tailwind.config.js
+exampleSite/public/
+exampleSite/resources/
+exampleSite/themes/
+resources/
+public/
+*.tar.gz

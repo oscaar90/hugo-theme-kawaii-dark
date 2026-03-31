@@ -1,0 +1,46 @@
+<footer class="border-t border-zinc-900 mt-32">
+  <div class="max-w-5xl mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <!-- Left: name + tagline -->
+      <div class="text-center md:text-left">
+        <p class="text-smoke font-semibold text-sm">{{ .Site.Title }}</p>
+        {{ with .Site.Params.footer_tagline }}
+        <p class="text-muted text-xs mt-1">{{ . }}</p>
+        {{ end }}
+      </div>
+
+      <!-- Center: links -->
+      {{ with .Site.Params.social }}
+      <ul class="flex items-center gap-6">
+        {{ with .github }}
+        <li>
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+             class="text-muted text-xs font-mono hover:text-smoke transition-colors">GitHub</a>
+        </li>
+        {{ end }}
+        {{ with .linkedin }}
+        <li>
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+             class="text-muted text-xs font-mono hover:text-smoke transition-colors">LinkedIn</a>
+        </li>
+        {{ end }}
+        {{ with .twitter }}
+        <li>
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+             class="text-muted text-xs font-mono hover:text-smoke transition-colors">Twitter/X</a>
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+
+      <!-- Right: credits -->
+      <p class="text-muted text-xs font-mono text-center md:text-right">
+        © {{ now.Year }} Óscar Sánchez Pérez · Hugo +
+        <span class="text-blue">♥</span>
+        + Tailwind
+      </p>
+
+    </div>
+  </div>
+</footer>

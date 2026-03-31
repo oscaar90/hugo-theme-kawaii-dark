@@ -1,0 +1,12 @@
+name = "Kawaii Dark Minimal"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Hybrid dark theme: Minimal Black philosophy + Kawaii color accents + Tailroad structure. Portfolio-first with metrics grid, blog experimental via tags only."
+homepage = ""
+tags = ["portfolio", "blog", "dark", "tailwind", "minimal", "kawaii", "ctf"]
+features = ["tags", "code-highlight", "responsive", "dark"]
+min_version = "0.110.0"
+
+[author]
+  name = "Óscar Sánchez Pérez"
+  homepage = "https://oscarai.tech"
