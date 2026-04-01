@@ -1,0 +1,55 @@
+{{ $p := .Paginator }}
+{{ if gt $p.TotalPages 1 }}
+<nav class="flex items-center justify-center gap-1 mt-16 font-mono text-sm">
+
+  {{/* Primera página */}}
+  {{ if $p.HasPrev }}
+  <a href="{{ $p.First.URL }}"
+     class="px-3 py-1.5 border border-zinc-800 rounded-lg text-muted
+            hover:border-blue/30 hover:text-blue transition-all duration-200">
+    ««
+  </a>
+  <a href="{{ $p.Prev.URL }}"
+     class="px-3 py-1.5 border border-zinc-800 rounded-lg text-muted
+            hover:border-blue/30 hover:text-blue transition-all duration-200">
+    «
+  </a>
+  {{ else }}
+  <span class="px-3 py-1.5 border border-zinc-900 rounded-lg text-zinc-700 cursor-default">««</span>
+  <span class="px-3 py-1.5 border border-zinc-900 rounded-lg text-zinc-700 cursor-default">«</span>
+  {{ end }}
+
+  {{/* Números de página */}}
+  {{ range $p.Pagers }}
+  {{ if eq . $p }}
+  <span class="px-3 py-1.5 border border-blue/40 rounded-lg text-blue bg-blue/5">
+    {{ .PageNumber }}
+  </span>
+  {{ else }}
+  <a href="{{ .URL }}"
+     class="px-3 py-1.5 border border-zinc-800 rounded-lg text-muted
+            hover:border-blue/30 hover:text-blue transition-all duration-200">
+    {{ .PageNumber }}
+  </a>
+  {{ end }}
+  {{ end }}
+
+  {{/* Última página */}}
+  {{ if $p.HasNext }}
+  <a href="{{ $p.Next.URL }}"
+     class="px-3 py-1.5 border border-zinc-800 rounded-lg text-muted
+            hover:border-blue/30 hover:text-blue transition-all duration-200">
+    »
+  </a>
+  <a href="{{ $p.Last.URL }}"
+     class="px-3 py-1.5 border border-zinc-800 rounded-lg text-muted
+            hover:border-blue/30 hover:text-blue transition-all duration-200">
+    »»
+  </a>
+  {{ else }}
+  <span class="px-3 py-1.5 border border-zinc-900 rounded-lg text-zinc-700 cursor-default">»</span>
+  <span class="px-3 py-1.5 border border-zinc-900 rounded-lg text-zinc-700 cursor-default">»»</span>
+  {{ end }}
+
+</nav>
+{{ end }}
