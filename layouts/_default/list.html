@@ -32,13 +32,16 @@
       <p class="text-muted text-xs font-mono tracking-widest uppercase mb-5">Tags</p>
       <div class="flex flex-wrap gap-2">
         {{ range $name, $taxonomy := $allTags }}
-        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}"
+        {{ $termPage := $.Site.GetPage (printf "/tags/%s" ($name | urlize)) }}
+        {{ if $termPage }}
+        <a href="{{ $termPage.RelPermalink }}"
            class="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5
                   bg-surface border border-zinc-800 rounded-full
                   text-muted hover:text-blue hover:border-blue/30 transition-all duration-200">
           #{{ $name }}
           <span class="text-zinc-700">{{ len $taxonomy }}</span>
         </a>
+        {{ end }}
         {{ end }}
       </div>
     </div>
@@ -75,9 +78,14 @@
               {{ if .Params.tags }}
               <div class="flex flex-wrap gap-2 items-center">
                 {{ range .Params.tags }}
-                <span class="text-xs font-mono text-blue/50 bg-blue/5 px-2 py-0.5 rounded-full">
+                {{ $termPage := $.Site.GetPage (printf "/tags/%s" (. | urlize)) }}
+                {{ if $termPage }}
+                <a href="{{ $termPage.RelPermalink }}"
+                   class="text-xs font-mono text-blue/50 bg-blue/5 px-2 py-0.5 rounded-full
+                          hover:text-blue hover:bg-blue/10 transition-colors duration-200">
                   #{{ . }}
-                </span>
+                </a>
+                {{ end }}
                 {{ end }}
                 <span class="text-muted text-xs ml-auto">{{ .ReadingTime }} min</span>
               </div>

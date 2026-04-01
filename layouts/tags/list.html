@@ -13,17 +13,17 @@
 
     <!-- ── Tag grid ── -->
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-      <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}"
+      {{ range .Pages }}
+      <a href="{{ .RelPermalink }}"
          class="group flex items-center justify-between
                 bg-surface border border-zinc-900 rounded-xl px-4 py-3
                 hover:border-blue/30 hover:bg-[#181c24] transition-all duration-200">
 
         <span class="text-sm font-mono text-muted group-hover:text-smoke transition-colors">
-          #{{ $name }}
+          #{{ .Title }}
         </span>
         <span class="text-xs font-mono text-zinc-700 group-hover:text-blue transition-colors">
-          {{ len $taxonomy }}
+          {{ len .Pages }}
         </span>
 
       </a>
