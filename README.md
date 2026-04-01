@@ -7,7 +7,7 @@ Designed around a portfolio-first layout: hero section, metrics grid, full CV pa
 ![Hugo](https://img.shields.io/badge/Hugo-0.110+-pink?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-black?style=flat-square)
 
-> Work in progress. Some features are still being developed. See [PENDIENTE.md](PENDIENTE.md) for open issues and planned work.
+> Work in progress. Some features are still being developed.
 
 ---
 
@@ -177,12 +177,6 @@ theme        = "kawaii-dark"
     url    = "/cv"
     weight = 40
 ```
-
----
-
-## Known issues
-
-See [PENDIENTE.md](PENDIENTE.md).
 
 ---
 
