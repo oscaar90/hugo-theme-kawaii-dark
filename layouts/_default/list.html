@@ -51,53 +51,7 @@
 
     <!-- ── Post list ── -->
     <div>
-      {{ range .Pages }}
-      <article class="group border-b border-zinc-900 py-8 first:pt-0">
-        <a href="{{ .Permalink }}" class="block">
-          <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
-
-            <!-- Date column -->
-            <time class="text-muted text-xs font-mono shrink-0 sm:w-20 sm:pt-1.5">
-              {{ .Date.Format "Jan 2006" }}
-            </time>
-
-            <!-- Content column -->
-            <div class="flex-1 min-w-0">
-              <h2 class="text-smoke font-semibold text-lg leading-snug mb-2
-                         group-hover:text-blue transition-colors duration-200">
-                {{ .Title }}
-              </h2>
-
-              {{ if .Summary }}
-              <p class="text-muted text-sm leading-relaxed mb-4 line-clamp-2">
-                {{ .Summary | plainify | truncate 150 }}
-              </p>
-              {{ end }}
-
-              <!-- Tags + reading time -->
-              <div class="flex flex-wrap gap-2 items-center">
-                {{ if .Params.tags }}
-                {{ range .Params.tags }}
-                {{ $termPage := $.Site.GetPage (printf "/tags/%s" (. | urlize)) }}
-                {{ if $termPage }}
-                <a href="{{ $termPage.RelPermalink }}"
-                   class="text-xs font-mono text-blue/50 bg-blue/5 px-2 py-0.5 rounded-full
-                          hover:text-blue hover:bg-blue/10 transition-colors duration-200">
-                  #{{ . }}
-                </a>
-                {{ end }}
-                {{ end }}
-                {{ end }}
-                {{ if gt .ReadingTime 0 }}
-                <span class="text-muted text-xs ml-auto">{{ .ReadingTime }} min</span>
-                {{ end }}
-              </div>
-            </div>
-
-          </div>
-        </a>
-      </article>
-      {{ end }}
+      {{ partial "post-list.html" . }}
     </div>
 
 

@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="pt-32 pb-32 px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <!-- ── Header ── -->
+    <header class="mb-16">
+      <p class="text-blue text-xs font-mono tracking-widest uppercase mb-3">Tag</p>
+      <h1 class="text-4xl font-bold text-smoke">#{{ .Title }}</h1>
+      <p class="text-muted text-sm font-mono mt-4">
+        {{ len .Pages }} {{ if eq (len .Pages) 1 }}entrada{{ else }}entradas{{ end }}
+      </p>
+    </header>
+
+    <!-- ── Post list ── -->
+    <div>
+      {{ partial "post-list.html" . }}
+    </div>
+
+    <!-- ── Pagination ── -->
+    {{ template "_internal/pagination.html" . }}
+
+  </div>
+</div>
+{{ end }}
