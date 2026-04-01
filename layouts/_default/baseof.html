@@ -35,6 +35,9 @@
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   {{ end }}
 
+  <!-- GLightbox -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
   {{ block "head" . }}{{ end }}
 </head>
 <body class="bg-void text-smoke min-h-screen font-sans">
@@ -46,6 +49,12 @@
   </main>
 
   {{ partial "footer.html" . }}
+
+  <!-- GLightbox init -->
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    GLightbox({ selector: '.glightbox', touchNavigation: true, loop: false });
+  </script>
 
 </body>
 </html>

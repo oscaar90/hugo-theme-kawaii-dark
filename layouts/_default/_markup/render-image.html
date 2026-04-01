@@ -1,0 +1,7 @@
+<a href="{{ .Destination | safeURL }}" class="glightbox"
+  {{- with .Title }} data-title="{{ . }}"{{ end }}
+  {{- with .Text }} data-description="{{ . }}"{{ end }}>
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"
+    {{ with .Title }}title="{{ . }}"{{ end }}
+    class="rounded-lg w-full my-4 cursor-zoom-in">
+</a>
