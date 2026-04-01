@@ -29,5 +29,11 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    'text-blue/50', 'bg-blue/5', 'bg-blue/10',
+    'border-blue/10', 'border-blue/30', 'border-blue/40',
+    'hover:text-blue', 'hover:bg-blue/10', 'hover:border-blue/30',
+    'text-blue', 'bg-blue/5',
+  ],
   plugins: [],
 }
