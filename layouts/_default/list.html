@@ -74,9 +74,9 @@
               </p>
               {{ end }}
 
-              <!-- Tags -->
-              {{ if .Params.tags }}
+              <!-- Tags + reading time -->
               <div class="flex flex-wrap gap-2 items-center">
+                {{ if .Params.tags }}
                 {{ range .Params.tags }}
                 {{ $termPage := $.Site.GetPage (printf "/tags/%s" (. | urlize)) }}
                 {{ if $termPage }}
@@ -87,9 +87,11 @@
                 </a>
                 {{ end }}
                 {{ end }}
+                {{ end }}
+                {{ if gt .ReadingTime 0 }}
                 <span class="text-muted text-xs ml-auto">{{ .ReadingTime }} min</span>
+                {{ end }}
               </div>
-              {{ end }}
             </div>
 
           </div>
